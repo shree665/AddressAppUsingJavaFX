@@ -53,7 +53,7 @@
                         <Label fx:id="birthdayLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <AnchorPane layoutX="230.0" layoutY="265.0">
+                  <AnchorPane layoutX="185.0" layoutY="253.0">
                      <children>
                         <Button layoutX="63.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit..." />
                         <Button layoutX="126.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
