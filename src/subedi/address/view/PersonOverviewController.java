@@ -29,6 +29,8 @@ public class PersonOverviewController {
     @FXML
     private Label cityLabel;
     @FXML
+    private Label stateLabel;
+    @FXML
     private Label birthdayLabel;
     
     // Reference to the main application.
@@ -85,6 +87,7 @@ public class PersonOverviewController {
             streetLabel.setText(person.getStreet());
             postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
             cityLabel.setText(person.getCity());
+            stateLabel.setText(person.getState());
             birthdayLabel.setText(DateUtil.format(person.getBirthday()));
         } else {
             // Person is null, remove all the text.
@@ -93,6 +96,7 @@ public class PersonOverviewController {
             streetLabel.setText("");
             postalCodeLabel.setText("");
             cityLabel.setText("");
+            stateLabel.setText("");
             birthdayLabel.setText("");
         }
     }

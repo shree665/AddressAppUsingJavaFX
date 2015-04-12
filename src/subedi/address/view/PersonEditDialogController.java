@@ -20,6 +20,8 @@ public class PersonEditDialogController {
     @FXML
     private TextField cityField;
     @FXML
+    private TextField stateField;
+    @FXML
     private TextField birthdayField;
 
 
@@ -57,6 +59,7 @@ public class PersonEditDialogController {
         streetField.setText(person.getStreet());
         postalCodeField.setText(Integer.toString(person.getPostalCode()));
         cityField.setText(person.getCity());
+        stateField.setText(person.getState());
         birthdayField.setText(DateUtil.format(person.getBirthday()));
         birthdayField.setPromptText("MM/dd/yyyy");
     }
@@ -81,6 +84,7 @@ public class PersonEditDialogController {
             person.setStreet(streetField.getText());
             person.setPostalCode(Integer.parseInt(postalCodeField.getText()));
             person.setCity(cityField.getText());
+            person.setState(stateField.getText());
             person.setBirthday(DateUtil.parse(birthdayField.getText()));
 
             okClicked = true;
@@ -127,6 +131,10 @@ public class PersonEditDialogController {
 
         if (cityField.getText() == null || cityField.getText().length() == 0) {
             errorMessage += "No valid city!\n"; 
+        }
+        
+        if (stateField.getText() == null || stateField.getText().length() == 0) {
+            errorMessage += "No valid State name provided!\n"; 
         }
 
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {

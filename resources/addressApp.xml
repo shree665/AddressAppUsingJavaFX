@@ -1,0 +1,18 @@
+<persons>
+    <person>
+        <birthday>1999-02-21</birthday>
+        <city>some city</city>
+        <firstName>Hans</firstName>
+        <lastName>Muster</lastName>
+        <postalCode>1234</postalCode>
+        <street>some street</street>
+    </person>
+    <person>
+        <birthday>1999-02-21</birthday>
+        <city>some city</city>
+        <firstName>Anna</firstName>
+        <lastName>Best</lastName>
+        <postalCode>1234</postalCode>
+        <street>some street</street>
+    </person>
+</persons>

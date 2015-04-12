@@ -2,6 +2,9 @@ package subedi.address.model;
 
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import subedi.address.util.LocalDateAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,7 +18,8 @@ public class Person {
     private final StringProperty street;
     private final IntegerProperty postalCode;
     private final StringProperty city;
-    private final ObjectProperty<LocalDate> birthday;
+    private final StringProperty state;
+	private final ObjectProperty<LocalDate> birthday;
     
     /**
      * Default constructor.
@@ -39,6 +43,7 @@ public class Person {
         this.street = new SimpleStringProperty("some street");
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
+        this.state = new SimpleStringProperty("myState");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
     }
     
@@ -102,9 +107,18 @@ public class Person {
         return city;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthday() {
         return birthday.get();
     }
+    
+    public void setState(String state) {
+    	this.state.set(state);
+    }
+    
+    public String getState() {
+		return state.get();
+	}
 
     public void setBirthday(LocalDate birthday) {
         this.birthday.set(birthday);
