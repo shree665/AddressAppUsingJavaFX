@@ -11,7 +11,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+/**
+ * Class to hold the personal information for the AddressApp
+ * 
+ */
 public class Person {
 	private final StringProperty firstName;
     private final StringProperty lastName;
@@ -21,11 +24,7 @@ public class Person {
     private final StringProperty state;
 	private final ObjectProperty<LocalDate> birthday;
     
-    /**
-     * Default constructor.
-     */
     public Person() {
-    	
         this(null, null);
     }
     

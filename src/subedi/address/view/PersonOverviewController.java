@@ -9,7 +9,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
+/**
+ * The controller for the person overview. It contains table and person details
+ * This will go on top of the root layout controller.
+ */
 public class PersonOverviewController {
 	@FXML
     private TableView<Person> personTable;

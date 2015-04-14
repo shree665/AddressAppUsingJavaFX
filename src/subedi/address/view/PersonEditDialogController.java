@@ -8,6 +8,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * The controller for the edit and new button.
+ */
 public class PersonEditDialogController {
 	@FXML
     private TextField firstNameField;
@@ -74,7 +77,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Called when the user clicks ok.
+     * Called when the user clicks OK.
      */
     @FXML
     private void handleOk() {

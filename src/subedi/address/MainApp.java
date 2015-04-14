@@ -37,13 +37,13 @@ public class MainApp extends Application {
 	private Stage primaryStage;
     private BorderPane rootLayout;
     private File file;
-    /**
-     * The data as an observable list of Persons.
-     */
+    
+    //The data as an observable list of Persons
     private ObservableList<Person> personData = FXCollections.observableArrayList();
     
     /**
-     * Constructor
+     * Constructor that initializes the file name on where the data would be storing
+     * 
      * @throws IOException 
      */
     public MainApp() throws IOException {
@@ -80,7 +80,7 @@ public class MainApp extends Application {
     
     /**
      * Returns the data as an observable list of Persons. 
-     * @return
+     * @return list of person
      */
     public ObservableList<Person> getPersonData() {
         return personData;
@@ -123,7 +123,7 @@ public class MainApp extends Application {
     	        e.printStackTrace();
     	    }
 
-    	    // Try to load last opened person file.
+    	    // Try to load last opened person file if exists.
     	    File file = getPersonFilePath();
     	    if (file != null) {
     	        loadPersonDataFromFile(file);
@@ -157,7 +157,7 @@ public class MainApp extends Application {
      * clicks OK, the changes are saved into the provided person object and true
      * is returned.
      * 
-     * @param person the person object to be edited
+     * @param person - the person object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
     public boolean showPersonEditDialog(Person person) {
@@ -192,7 +192,7 @@ public class MainApp extends Application {
     
     /**
      * Returns the main stage.
-     * @return
+     * @return the stage
      */
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -203,11 +203,10 @@ public class MainApp extends Application {
 	}
 	
 	/**
-	 * Returns the person file preference, i.e. the file that was last opened.
-	 * The preference is read from the OS specific registry. If no such
-	 * preference can be found, null is returned.
+	 * Method to get the file to load for the first time on every run
+	 * If it is in the specified directory otherwise it will be created
 	 * 
-	 * @return
+	 * @return file that contains the person data
 	 */
 	public File getPersonFilePath() {
 	    /*Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
@@ -284,7 +283,8 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Saves the current person data to the specified file.
+	 * Saves the current person data to the specified file i.e. created
+	 * in the constructor.
 	 * 
 	 * @param file
 	 */
