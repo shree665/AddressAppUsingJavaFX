@@ -56,7 +56,7 @@ public class MainApp extends Application {
             Files.createFile(path);
             file = path.toFile();
         } catch (FileAlreadyExistsException e) {
-            System.out.println("already exists: " + e.getMessage());
+            System.out.println("already exists. Opening the old file " + e.getMessage());
             file = path.toFile();
         }
     	System.out.println(path.toString());
@@ -210,13 +210,14 @@ public class MainApp extends Application {
 	 * @return
 	 */
 	public File getPersonFilePath() {
-	    Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+	    /*Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	    String filePath = prefs.get("filePath", null);
 	    if (filePath != null) {
 	        return new File(filePath);
 	    } else {
 	        return null;
-	    }
+	    }*/
+		return this.file;
 	}
 
 	/**
@@ -257,6 +258,7 @@ public class MainApp extends Application {
 
 	//common method to load file with user choice or self generated
 	private void loadPersonFile(File personFile) {
+		System.out.println(personFile.getPath());
 		try {
 	        JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
 	        Unmarshaller um = context.createUnmarshaller();
@@ -274,8 +276,8 @@ public class MainApp extends Application {
 	        Alert alert = new Alert(AlertType.INFORMATION);
 	        alert.setTitle("Information");
 	        alert.setHeaderText("Creating Data file!");
-	        alert.setContentText("Your data file wll be created on:\n" + personFile.getPath());
-	        alert.setContentText("If you want to load your own data file, please open using file menu");
+	        alert.setContentText("Your data file wll be created on:\n" + personFile.getPath() 
+	        		+"\n\nIf you want to load your own data file, please open using file menu");
 	        alert.showAndWait();
 	    }
 		
