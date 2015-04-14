@@ -2,8 +2,13 @@ package subedi.address;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.prefs.Preferences;
 
+import javax.swing.JFileChooser;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -31,6 +36,7 @@ public class MainApp extends Application {
 	
 	private Stage primaryStage;
     private BorderPane rootLayout;
+    private File file;
     /**
      * The data as an observable list of Persons.
      */
@@ -38,18 +44,23 @@ public class MainApp extends Application {
     
     /**
      * Constructor
+     * @throws IOException 
      */
-    public MainApp() {
-        // Add some sample data
-        //personData.add(new Person("Vivek", "Subedi"));
-        //personData.add(new Person("Ruth", "Deed"));
-        //personData.add(new Person("Sohan", "Shrestha"));
-        //personData.add(new Person("Brandon", "Wright"));
-        //personData.add(new Person("Manoj", "Shrestha"));
-        //personData.add(new Person("Suraj", "Karki"));
-        //personData.add(new Person("Anna", "Best"));
-        //personData.add(new Person("Stewart", "Bishop"));
-        //personData.add(new Person("Martin", "King"));
+    public MainApp() throws IOException {
+    	//gets the users home folder
+    	String DefaultFolder =new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+    	//System.out.println(DefaultFolder);
+    	Path path = Paths.get(DefaultFolder + File.separator+"addressApp"+File.separator+"addressApp.xml");
+    	Files.createDirectories(path.getParent());
+    	try {
+            Files.createFile(path);
+            file = path.toFile();
+        } catch (FileAlreadyExistsException e) {
+            System.out.println("already exists: " + e.getMessage());
+            file = path.toFile();
+        }
+    	System.out.println(path.toString());
+
     }
     
 	@Override
@@ -237,27 +248,37 @@ public class MainApp extends Application {
 	 * @param file
 	 */
 	public void loadPersonDataFromFile(File file) {
-	    try {
+		if (file.exists()) {
+			loadPersonFile(file);
+		} else {
+			loadPersonFile(this.file);
+		}
+	}
+
+	//common method to load file with user choice or self generated
+	private void loadPersonFile(File personFile) {
+		try {
 	        JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
 	        Unmarshaller um = context.createUnmarshaller();
 
 	        // Reading XML from the file and unmarshalling.
-	        PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
+	        PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(personFile);
 
 	        personData.clear();
 	        personData.addAll(wrapper.getPersons());
 
 	        // Save the file path to the registry.
-	        setPersonFilePath(file);
+	        setPersonFilePath(personFile);
 
 	    } catch (Exception e) { // catches ANY exception
-	        Alert alert = new Alert(AlertType.ERROR);
-	        alert.setTitle("Error");
-	        alert.setHeaderText("Could not load data");
-	        alert.setContentText("Could not load data from file:\n" + file.getPath());
-
+	        Alert alert = new Alert(AlertType.INFORMATION);
+	        alert.setTitle("Information");
+	        alert.setHeaderText("Creating Data file!");
+	        alert.setContentText("Your data file wll be created on:\n" + personFile.getPath());
+	        alert.setContentText("If you want to load your own data file, please open using file menu");
 	        alert.showAndWait();
 	    }
+		
 	}
 
 	/**
