@@ -56,7 +56,7 @@ public class MainApp extends Application {
             Files.createFile(path);
             file = path.toFile();
         } catch (FileAlreadyExistsException e) {
-            System.out.println("already exists. Opening the old file " + e.getMessage());
+            //System.out.println("already exists. Opening the old file " + e.getMessage());
             file = path.toFile();
         }
     	System.out.println(path.toString());
@@ -169,7 +169,7 @@ public class MainApp extends Application {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Person");
+            dialogStage.setTitle("Enter Person's Information");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -258,7 +258,7 @@ public class MainApp extends Application {
 
 	//common method to load file with user choice or self generated
 	private void loadPersonFile(File personFile) {
-		System.out.println(personFile.getPath());
+		//System.out.println(personFile.getPath());
 		try {
 	        JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
 	        Unmarshaller um = context.createUnmarshaller();
